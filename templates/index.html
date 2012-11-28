@@ -1,0 +1,81 @@
+<html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" type='text/css' href={{url_for('static' , filename='style.css')}} />
+	<script type='text/javascript' src={{url_for('static' , filename= 'jquery-1.8.3.js')}}></script>
+	<script type='text/javascript' src={{url_for('static' , filename= 'd3.v2.min.js')}}></script>
+	<script type='text/javascript'>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+	<script type='text/javascript' src={{url_for('static' , filename= 'computation.js')}}></script>
+</head>
+<body>
+	<div id="header">
+		<h1>Approximate Pulse Deaggregation</h1>
+	</div>
+	<div id='formDiv'>
+		<h2>Deaggregation Info</h2>
+		{% for message in get_flashed_messages() %}
+			<div class=message>{{message}}</div>
+		{% endfor %}
+			<ul>
+				<li><label for="analysis_name">Analysis name</label><input type="text" name="analysis_name" id="analysis_name" value="" /></li>
+				
+				<li><label for="latitude">Latitude</label><input type="text" name="latitude" id="latitude" />
+				<label for="longitude">Longitude</label><input type="text" name="longitude" id="longitude" /></li>
+				
+				<li><label for="percent">Exceedance Probability</label><select name="percent" id="percent">
+					<option value="1">1%</option>
+					<option value="2" selected="selected">2%</option>
+					<option value="5">5%</option>
+					<option value="10">10%</option>
+					<option value="20">20%</option>
+					<option value="50">50%</option>
+				</select>
+				<label for="years"> in </label><select name="years" id="years">
+					<option value="21">21 years</option>
+					<option value="30">30 years</option>
+					<option value="50" selected="selected">50 years</option>
+					<option value="75">75 years</option>
+					<option value="100">100 years</option>
+					<option value="200">200 years</option>
+				</select>
+				</li>
+				
+				<li><label for="period">Period</label><select name="period" id="period">
+					<option value="1" selected="selected"> 0.0 seconds (Peak Ground Acceleration)</option>
+					<option value="2">0.1 seconds (10Hz)</option>
+					<option value="3">0.2 seconds (5Hz)</option>
+					<option value="4">0.3 seconds (3.33Hz)</option>
+					<option value="5">0.5 seconds (2Hz)</option>
+					<option value="6">1.0 second (1Hz)</option>
+					<option value="7">2.0 seconds (0.5Hz)</option>
+					<option value="8">3.0 seconds (0.33Hz)</option>
+					<option value="9">4.0 seconds (0.25Hz)</option>
+					<option value="10">5.0 seconds (0.2Hz)</option>
+				</select></li>
+				
+				<li><label for="vs30">Vs30</label><input type="text" name="vs30" id="vs30" value="760.0"/></li>
+				
+				<li><button type="submit" id="submit">Submit</button></li>
+			</ul>
+	</div>
+	<div id='latNumError' class="errors"> Error : Latitude has to be a number </div>
+	<div id='lonNumError' class="errors"> Error : Longitude has to be a number </div>
+	<div id='latRangeError' class="errors"> Error : Latitude out of range. Results are only available for continental US. </div>
+	<div id='lonRangeError' class="errors"> Error : Longitude out of range. Results are only available for continental US. </div>
+	<div id='USGSerror' class="errors">Error occurred while parsing response from USGS server. Please check if the input produces valid response from <a href="https://geohazards.usgs.gov/deaggint/2008/">USGS Interactive Deaggregations</a>.</div>
+	<div id='loadingDiv' class='hiddenDiv'>
+		<p>Requests can take a few minutes to process.</p>
+		<img src={{ url_for('static',filename='ajax-loader.gif') }} />
+	</div>
+	
+	<div id='ppulseDiv' class='hiddenDiv'>
+		<h3>Probability that a pulse caused  <span id="PpulsePercent"> </span>  percent in  <span id="PpulseYears"> </span> years hazard exceedance</h3>
+		<p>P(pulse | Sa > <span id="PpulseSaLevel"></span> ) =  <span id="ppulseResult"></span></p>
+	</div>
+	<div id='TpDiv' class='hiddenDiv'></div>
+	<div id='downloadDiv' class='hiddenDiv'> 
+		<h3>Download results</h3>
+		<a id = "dldLink" href="">txt file</a>
+	</div>
+</body>
+</html>

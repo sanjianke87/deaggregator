@@ -1,0 +1,86 @@
+/*.hiddenDiv{
+	visibility:hidden;
+}*/
+/*@font-face {
+  font-family: 'Old Standard TT';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Old Standard TT Italic'), local('OldStandardTT-Italic'), url(http://themes.googleusercontent.com/static/fonts/oldstandardtt/v4/QQT_AUSp4AV4dpJfIN7U5KCfO6YLYlwZkGaKgYrym0o.woff) format('woff');
+}*/
+
+#loadingDiv{
+	background-color: #F5F6CE;
+	text-align: center;
+	padding:10px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+.errors{
+	background-color: #FFCCCC;
+	text-align: center;
+	padding:5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+body{
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#EFF2FB;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#header{
+	text-align:center;
+}
+#formDiv{
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background-color:#CED8F6;
+	padding:10px;
+	padding-left:30%;
+}
+#ppulseDiv{
+	background-color:#E0E6F8;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	padding:20px;
+	text-align:center;
+	margin-top:5px;
+}
+#TpDiv{
+	background-color:#E0E6F8;
+	text-align:center;
+	padding:20px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	margin-top:5px;
+}
+#downloadDiv{
+	background-color:#E0E6F8;
+	text-align:center;
+	padding:20px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	margin-top:5px;
+}
+
+ul{
+	list-style-type: none;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+/*.x.axis path {
+  display: none;
+}*/
